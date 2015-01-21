@@ -5,7 +5,6 @@ makeCacheMatrix <-function(x=numeric()){
       ## Flusing cache for reset
       m<-NULL
       
-      ## Set the 
       setm<-function(x1){
             
             ## To make sure the cache is not flushed if the matrix is identical
