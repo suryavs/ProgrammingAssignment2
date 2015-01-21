@@ -5,6 +5,7 @@ makeCacheMatrix <-function(x=numeric()){
       ## Flusing cache for reset
       m<-NULL
       
+      ## Set the 
       setm<-function(x1){
             
             ## To make sure the cache is not flushed if the matrix is identical
@@ -35,12 +36,15 @@ makeCacheMatrix <-function(x=numeric()){
 cacheSolve<-function(x){
       m<-x$getmi()
       
+      ## To check if the cache is not empty
       if(!is.null(m)){
             message("Returning cached value")
             return(m)
       }
       
       minverse<-x$getm()
+      
+      ## Calculate the inverse of the matrix if the cache id emtpy
       m<-solve(minverse)
       x$setmi(m)
       m
