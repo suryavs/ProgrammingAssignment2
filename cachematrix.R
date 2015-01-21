@@ -1,15 +1,47 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
+## Function to create special vector
+makeCacheMatrix <-function(x=numeric()){
+      
+      ## Flusing cache for reset
+      m<-NULL
+      
+      setm<-function(x1){
+            
+            ## To make sure the cache is not flushed if the matrix is identical
+            if(identical(x,x1)){
+                  x<<-x1
+                  message("Don't flush cached value")
+            }
+            x<<-x1
+            m<<-NULL
+      }
+      ## To retrieve the matrix
+      getm<-function(){
+            x
+      }
+      
+      setmi<-function(mIn){
+            m<<-mIn
+      }
+      
+      getmi<-function(){
+            m
+      }
+      
+      list(setm=setm,getm=getm,setmi=setmi,getmi=getmi)
 }
 
-
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+## Function to calculate the inverse of the matrix
+cacheSolve<-function(x){
+      m<-x$getmi()
+      
+      if(!is.null(m)){
+            message("Returning cached value")
+            return(m)
+      }
+      
+      minverse<-x$getm()
+      m<-solve(minverse)
+      x$setmi(m)
+      m
 }
